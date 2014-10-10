@@ -24,9 +24,85 @@ namespace BitManipulationExtensions
 {
     internal class Shared
     {
+#if INCLUDE_UNSAFE
         internal const int UnmanagedThreshold = 128;
         internal static readonly int PlatformWordSize = IntPtr.Size;
         internal static readonly int PlatformWordSizeBits = PlatformWordSize * 8;
+#endif
+
+        internal static int SizeOf<T>() where T : struct
+        {
+            var typeOfT = typeof(T);
+            if (typeOfT == typeof(byte)) {
+                return 1;
+            } else if (typeOfT == typeof(short) || typeOfT == typeof(ushort)) {
+                return sizeof(short);
+            } else if (typeOfT == typeof(int) || typeOfT == typeof(uint)) {
+                return sizeof(int);
+            } else if (typeOfT == typeof(long) || typeOfT == typeof(ulong)) {
+                return sizeof(long);
+            }
+            // Other type
+            throw new NotSupportedException("T : " + typeof(T).Name + " - Not a supported type."  );
+        }
+
+#if INCLUDE_UNSAFE
+        /// <summary>
+        ///     Copy data from <paramref name="src" /> into <paramref name="dst" />.
+        /// </summary>
+        /// <param name="src">Pointer to source of data.</param>
+        /// <param name="dst">Pointer to destination for data.</param>
+        /// <param name="length">Length of data to copy in bytes.</param>
+        internal static unsafe void CopyMemory(byte* src, byte* dst, int length)
+        {
+            if (Shared.PlatformWordSize == sizeof(UInt32)) {
+                while (length >= sizeof(UInt64)) {
+                    *(UInt32*)dst = *(UInt32*)src;
+                    dst += sizeof(UInt32);
+                    src += sizeof(UInt32);
+                    *(UInt32*)dst = *(UInt32*)src;
+                    dst += sizeof(UInt32);
+                    src += sizeof(UInt32);
+                    length -= sizeof(UInt64);
+                }
+            } else if (Shared.PlatformWordSize == sizeof(UInt64)) {
+                while (length >= sizeof(UInt64) * 2) {
+                    *(UInt64*)dst = *(UInt64*)src;
+                    dst += sizeof(UInt64);
+                    src += sizeof(UInt64);
+                    *(UInt64*)dst = *(UInt64*)src;
+                    dst += sizeof(UInt64);
+                    src += sizeof(UInt64);
+                    length -= sizeof(UInt64) * 2;
+                }
+
+                if (length >= sizeof(UInt64)) {
+                    *(UInt64*)dst = *(UInt64*)src;
+                    dst += sizeof(UInt64);
+                    src += sizeof(UInt64);
+                    length -= sizeof(UInt64);
+                }
+            }
+
+            if (length >= sizeof(UInt32)) {
+                *(UInt32*)dst = *(UInt32*)src;
+                dst += sizeof(UInt32);
+                src += sizeof(UInt32);
+                length -= sizeof(UInt32);
+            }
+
+            if (length >= sizeof(UInt16)) {
+                *(UInt16*)dst = *(UInt16*)src;
+                dst += sizeof(UInt16);
+                src += sizeof(UInt16);
+                length -= sizeof(UInt16);
+            }
+
+            if (length > 0) {
+                *dst = *src;
+            }
+        }
+#endif
     }
 }
 #endif

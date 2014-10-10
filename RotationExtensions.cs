@@ -152,6 +152,7 @@ namespace BitManipulationExtensions
         /// </summary>
         /// <param name="distance">Distance to rotate.</param>
         /// <param name="sizeOfTBits">Size of value type to be rotated, in bits (e.g. uint = 32 bits).</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ThrowOnInvalidArgument(int distance, int sizeOfTBits)
         {
             if (Math.Abs(distance) > sizeOfTBits) {
