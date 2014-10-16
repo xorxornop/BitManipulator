@@ -8,8 +8,8 @@
     <ProjectGuid>{7F121248-EBAE-4F9D-997D-6A1523876D77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BitManipulationExtensions</RootNamespace>
-    <AssemblyName>BitManipulationExtensions</AssemblyName>
+    <RootNamespace>BitManipulator</RootNamespace>
+    <AssemblyName>BitManipulator</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\BitManipulationExtensions.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\BitManipulator.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseUnsafe|AnyCPU'">
     <OutputPath>bin\ReleaseUnsafe\</OutputPath>
@@ -43,7 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\ReleaseUnsafe\BitManipulationExtensions.XML</DocumentationFile>
+    <DocumentationFile>bin\ReleaseUnsafe\BitManipulator.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->

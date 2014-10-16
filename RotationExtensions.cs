@@ -20,7 +20,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace BitManipulationExtensions
+namespace BitManipulator
 {
     /// <summary>
     ///     Extension methods for rotating integral numbers.
@@ -151,7 +151,7 @@ namespace BitManipulationExtensions
         ///     Validate arguments/parameters to prevent unexpected exceptions.
         /// </summary>
         /// <param name="distance">Distance to rotate.</param>
-        /// <param name="sizeOfTBits">Size of value type to be rotated, in bits (e.g. uint = 32 bits).</param>
+        /// <param name="sizeOfTBits">Size in bits of value type to be rotated (e.g. uint = 32 bits).</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ThrowOnInvalidArgument(int distance, int sizeOfTBits)
         {

@@ -21,7 +21,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace BitManipulationExtensions
+namespace BitManipulator
 {
     /// <summary>
     ///     Extension methods for packing/unpacking integral numbers into/out of byte arrays, in big-or-little endian formats.
@@ -1892,101 +1892,102 @@ namespace BitManipulationExtensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments16(byte[] ba, int baOff = 0)
         {
-            ValidateArgumentsImpl<ushort>(ba, baOff, 2);
+            ValidateArgumentsImpl<ushort>(ba, baOff, 16 / 8);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments16(byte[] ba, int baOff, short[] dst, int dstOff, int count)
         {
-            ValidateArgumentsImpl<short>(ba, baOff, dst, dstOff, count, 4);
+            ValidateArgumentsImpl(ba, baOff, dst, dstOff, count, sizeof(short));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments16(byte[] ba, int baOff, ushort[] dst, int dstOff, int count)
         {
-            ValidateArgumentsImpl<ushort>(ba, baOff, dst, dstOff, count, 4);
+            ValidateArgumentsImpl(ba, baOff, dst, dstOff, count, sizeof(ushort));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments32(byte[] ba, int baOff = 0)
         {
-            ValidateArgumentsImpl<uint>(ba, baOff, 4);
+            ValidateArgumentsImpl<uint>(ba, baOff, 32 / 8);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments32(byte[] ba, int baOff, int[] dst, int dstOff, int count)
         {
-            ValidateArgumentsImpl<int>(ba, baOff, dst, dstOff, count, 4);
+            ValidateArgumentsImpl(ba, baOff, dst, dstOff, count, sizeof(int));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments32(byte[] ba, int baOff, uint[] dst, int dstOff, int count)
         {
-            ValidateArgumentsImpl<uint>(ba, baOff, dst, dstOff, count, 4);
+            ValidateArgumentsImpl(ba, baOff, dst, dstOff, count, sizeof(uint));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments64(byte[] ba, int baOff = 0)
         {
-            ValidateArgumentsImpl<ulong>(ba, baOff, 8);
+            ValidateArgumentsImpl<ulong>(ba, baOff, 64 / 8);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments64(byte[] ba, int baOff, long[] dst, int dstOff, int count)
         {
-            ValidateArgumentsImpl<long>(ba, baOff, dst, dstOff, count, 8);
+            ValidateArgumentsImpl(ba, baOff, dst, dstOff, count, sizeof(long));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateArguments64(byte[] ba, int baOff, ulong[] dst, int dstOff, int count)
         {
-            ValidateArgumentsImpl<ulong>(ba, baOff, dst, dstOff, count, 8);
+            ValidateArgumentsImpl(ba, baOff, dst, dstOff, count, sizeof(ulong));
         }
 
         /// <summary>
         ///     Validate arguments/parameters to prevent unexpected exceptions. 
         ///     Throws well-defined exceptions for different types of invalid arguments(s). 
         /// </summary>
-        /// <param name="ba">Byte array that output will be produced from.</param>
-        /// <param name="baOff">Offset in <paramref name="ba"/> to read data from.</param>
+        /// <param name="src">Byte array that output will be produced from.</param>
+        /// <param name="srcOff">Offset in <paramref name="src"/> to read data from.</param>
         /// <param name="outputSizeRatio">
         ///     How many bytes are required to produce one unit of the output type <typeparamref name="T"/> 
-        ///     (<paramref name="ba"/> : <typeparamref name="T"/>). Default is null - size will be determined algorithmically. 
+        ///     (<paramref name="src"/> : <typeparamref name="T"/>). Default is null - size will be determined algorithmically. 
         ///     It is recommended to supply the size ratio for better performance, instead of relying on this.
         /// </param>
+        /// <typeparam name="T">Type of item that data from <paramref name="src"/> will be transformed to.</typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="ba"/> is null.
+        ///     <paramref name="src"/> is null.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     Length of <paramref name="ba"/> less than 0, 
+        ///     Length of <paramref name="src"/> less than 0, 
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     <list type="bullet">
         ///         <item><description>
-        ///             <paramref name="baOff"/> less than 0.
+        ///             <paramref name="srcOff"/> less than 0.
         ///         </description></item>
         ///         <item><description>
-        ///             <paramref name="baOff"/> more than length of <paramref name="ba"/> - sizeof(<typeparamref name="T"/>).
+        ///             <paramref name="srcOff"/> more than length of <paramref name="src"/> - sizeof(<typeparamref name="T"/>).
         ///         </description></item>
         ///     </list>
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void ValidateArgumentsImpl<T>(byte[] ba, int baOff, int? outputSizeRatio = null) where T : struct
+        private static void ValidateArgumentsImpl<T>(byte[] src, int srcOff, int? outputSizeRatio = null) where T : struct
         {
-            if (ba == null) {
-                throw new ArgumentNullException("ba");
+            if (src == null) {
+                throw new ArgumentNullException("src");
             }
-            if (ba.Length < 0) {
-                throw new ArgumentException("ba.Length < 0", "ba");
+            if (src.Length < 0) {
+                throw new ArgumentException("src.Length < 0", "src");
             }
-            if (baOff < 0) {
-                throw new ArgumentOutOfRangeException("baOff", "baOff < 0");
+            if (srcOff < 0) {
+                throw new ArgumentOutOfRangeException("srcOff", "srcOff < 0");
             }
             if (outputSizeRatio != null && outputSizeRatio < 1) {
                 throw new ArgumentOutOfRangeException("outputSizeRatio", "outputSizeRatio < 1");
             }
-            if (baOff > ba.Length - (outputSizeRatio ?? Shared.SizeOf<T>())) {
-                throw new ArgumentOutOfRangeException("baOff", "baOff > ba.Length - sizeof(T)");
+            if (srcOff > src.Length - (outputSizeRatio ?? Shared.SizeOf<T>())) {
+                throw new ArgumentOutOfRangeException("srcOff", "srcOff > src.Length - sizeof(T)");
             }
         }
 
@@ -1994,46 +1995,50 @@ namespace BitManipulationExtensions
         ///     Validate arguments/parameters to prevent unexpected exceptions. 
         ///     Throws well-defined exceptions for different types of invalid arguments(s). 
         /// </summary>
-        /// <param name="ba">Byte array that output will be produced from.</param>
-        /// <param name="baOff">Offset in <paramref name="ba"/> to read data from.</param>
+        /// <param name="src">Byte array that output will be produced from.</param>
+        /// <param name="srcOff">Offset in <paramref name="src"/> to read data from.</param>
         /// <param name="dst">Destination array of type <typeparamref name="T"/> for output.</param>
         /// <param name="dstOff">Offset in <paramref name="dst"/> to write data to.</param>
         /// <param name="count">Number of items (of the size of <typeparamref name="T"/>) to process.</param>
         /// <param name="outputSizeRatio">
         ///     How many bytes are required to produce one unit in <paramref name="dst"/> of the output type 
-        ///     <typeparamref name="T"/> (<paramref name="ba"/> : <paramref name="dst"/>). Default is null - size will be 
+        ///     <typeparamref name="T"/> (<paramref name="src"/> : <paramref name="dst"/>). Default is null - size will be 
         ///     determined algorithmically. It is recommended to supply the size ratio for better performance, 
         ///     instead of relying on this.
         /// </param>
+        /// <typeparam name="T">
+        ///     Destination/target type of data in <paramref name="dst"/> that data 
+        ///     from <paramref name="src"/> will be transformed to and written to.
+        /// </typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="ba"/> is null.
+        ///     <paramref name="src"/> is null.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     Length of <paramref name="ba"/> less than 0. 
+        ///     Length of <paramref name="src"/> less than 0. 
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     <list type="bullet">
         ///         <item><description>
-        ///             <paramref name="baOff"/> less than 0.
+        ///             <paramref name="srcOff"/> less than 0.
         ///         </description></item>
         ///         <item><description>
-        ///             <paramref name="baOff"/> more than length of <paramref name="ba"/> - (sizeof(<typeparamref name="T"/>) * <paramref name="count"/>).
+        ///             <paramref name="srcOff"/> more than length of <paramref name="src"/> - (sizeof(<typeparamref name="T"/>) * <paramref name="count"/>).
         ///         </description></item>
         ///         <item><description>
         ///             <paramref name="count"/> less than 1.
         ///         </description></item>
         ///         <item><description>
-        ///             <paramref name="count"/> less than length of <paramref name="ba"/>.
+        ///             <paramref name="count"/> less than length of <paramref name="src"/>.
         ///         </description></item>
         ///     </list>
         /// </exception>
-        internal static void ValidateArgumentsImpl<T>(byte[] ba, int baOff, T[] dst, int dstOff, int count, int? outputSizeRatio = null)
+        internal static void ValidateArgumentsImpl<T>(byte[] src, int srcOff, T[] dst, int dstOff, int count, int? outputSizeRatio = null)
             where T : struct
         {
-            if (ba == null) {
-                throw new ArgumentNullException("ba");
-            } else if (ba.Length < 0) {
-                throw new ArgumentException("ba.Length < 0", "ba");
+            if (src == null) {
+                throw new ArgumentNullException("src");
+            } else if (src.Length < 0) {
+                throw new ArgumentException("src.Length < 0", "src");
             }
 
             if (dst == null) {
@@ -2042,14 +2047,14 @@ namespace BitManipulationExtensions
                 throw new ArgumentException("dst.Length < 0", "dst");
             }
 
-            if (baOff < 0) {
-                throw new ArgumentOutOfRangeException("baOff", "baOff < 0");
+            if (srcOff < 0) {
+                throw new ArgumentOutOfRangeException("srcOff", "srcOff < 0");
             }
             if (dstOff < 0) {
                 throw new ArgumentOutOfRangeException("dstOff", "dstOff < 0");
             }
 
-            int srcLength = ba.Length;
+            int srcLength = src.Length;
             int dstLength = dst.Length;
 
             if (outputSizeRatio != null && outputSizeRatio < 1) {
@@ -2059,12 +2064,12 @@ namespace BitManipulationExtensions
             if (count < 0 || (count * dstToBaSizeRatio) > srcLength || count > dstLength) {
                 throw new ArgumentOutOfRangeException("count", "count < 0, and/or (count * sizeof(T)) > src.Length and/or count > dst.Length");
             }
-            if (baOff > 0 && baOff + (count * dstToBaSizeRatio) > srcLength) {
-                if (baOff >= srcLength) {
-                    throw new ArgumentOutOfRangeException("baOff", "baOff >= ba.Length");
+            if (srcOff > 0 && srcOff + (count * dstToBaSizeRatio) > srcLength) {
+                if (srcOff >= srcLength) {
+                    throw new ArgumentOutOfRangeException("srcOff", "srcOff >= src.Length");
                 }
                 // More common case
-                throw new ArgumentException("baOff + (count * sizeof(T)) > ba.Length", "baOff");
+                throw new ArgumentException("srcOff + (count * sizeof(T)) > src.Length", "srcOff");
             }
 
             if (dstOff > 0 && dstOff + count > dstLength) {
