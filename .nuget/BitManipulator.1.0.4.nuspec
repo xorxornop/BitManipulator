@@ -14,7 +14,7 @@
 Endianness-related functionality: short, ushort, int, uint, long, ulong : conversion between (to and from) individual items of these and byte arrays, and between arrays of any of these (UInt32[], for example) and byte arrays.
 Little and big-endian methods exist at feature and/or type parity.
 
-Rotation-related functionality: short, ushort, int, uint, long, ulong : left and right bitwise circular rotation ("rotate no carry").
+Rotation-related functionality: byte, short, ushort, int, uint, long, ulong : left and right bitwise circular rotation ("rotate no carry").
 Please note: the rotation implemented here is NOT "rotate through carry"! As such, sign is NOT handled specially for signed types.
 
 Endianness conversions operating on multiple values (bulk operations) are performance-enhanced with optimised 'unsafe' implementations. They are considerably faster than comparable operations provided by the BCL.</description>
@@ -22,6 +22,9 @@ Endianness conversions operating on multiple values (bulk operations) are perfor
         <releaseNotes>Added runtime check for system endianness, which controls which methods to use.
 
 Functionality related to endianness added: all types now have integer array to/from byte array methods (each with its own 'unsafe' high-performance implementations), as well as their own  _NoChecks methods like the rest of the use-modes (e.g. single value conversion vs. batch).
+Also, Int16/short methods were added.
+
+Functionality related to rotation added: byte methods.
 
 Optimised avoiding validating arguments as much as possible for performance (don't do it when its totally unnecessary, e.g. using a programatically-defined array where the offset and length are controlled). It really makes a difference in tight loops and the like (if one cannot use the batch processing methods - for example, if a non-linear array access pattern is required).</releaseNotes>
         <copyright>Matthew Ducker 2013-2014</copyright>
