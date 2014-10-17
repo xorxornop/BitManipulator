@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>BitManipulator</id>
+        <version>1.0.4</version>
+        <title>BitManipulator</title>
+        <authors>zenith</authors>
+        <owners>zenith</owners>
+        <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.txt</licenseUrl>
+        <projectUrl>http://github.com/zenith-nz/BitManipulator</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A set of extension methods for doing bitwise manipulation such as endianness (bytes&lt;--&gt;integral types) and rotation.
+
+Endianness-related functionality: short, ushort, int, uint, long, ulong : conversion between (to and from) individual items of these and byte arrays, and between arrays of any of these (UInt32[], for example) and byte arrays.
+Little and big-endian methods exist at feature and/or type parity.
+
+Rotation-related functionality: short, ushort, int, uint, long, ulong : left and right bitwise circular rotation ("rotate no carry").
+Please note: the rotation implemented here is NOT "rotate through carry"! As such, sign is NOT handled specially for signed types.
+
+Endianness conversions operating on multiple values (bulk operations) are performance-enhanced with optimised 'unsafe' implementations. They are considerably faster than comparable operations provided by the BCL.</description>
+        <summary>A set of extension methods for doing bitwise manipulation such as endianness (bytes&lt;--&gt;integral types) and rotation.</summary>
+        <releaseNotes>Added runtime check for system endianness, which controls which methods to use.
+
+Functionality related to endianness added: all types now have integer array to/from byte array methods (each with its own 'unsafe' high-performance implementations), as well as their own  _NoChecks methods like the rest of the use-modes (e.g. single value conversion vs. batch).
+
+Optimised avoiding validating arguments as much as possible for performance (don't do it when its totally unnecessary, e.g. using a programatically-defined array where the offset and length are controlled). It really makes a difference in tight loops and the like (if one cannot use the batch processing methods - for example, if a non-linear array access pattern is required).</releaseNotes>
+        <copyright>Matthew Ducker 2013-2014</copyright>
+        <tags>endian endianness rotation performance bit shift shifting manipulation</tags>
+    </metadata>
+    <files>
+        <file src="..\bin\ReleaseUnsafe\BitManipulator.dll" target="lib\portable-net4+netcore45+wpa81+MonoAndroid1+MonoTouch1\BitManipulator.dll" />
+        <file src="..\bin\ReleaseUnsafe\BitManipulator.pdb" target="lib\portable-net4+netcore45+wpa81+MonoAndroid1+MonoTouch1\BitManipulator.pdb" />
+        <file src="..\bin\ReleaseUnsafe\BitManipulator.xml" target="lib\portable-net4+netcore45+wpa81+MonoAndroid1+MonoTouch1\BitManipulator.xml" />
+    </files>
+</package>

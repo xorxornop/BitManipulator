@@ -30,35 +30,38 @@ namespace BitManipulator
 #endif
 
         /// <summary>
-        ///     Determine the size in memory used to store a struct 
-        ///     of type <typeparamref name="T"/> at runtime. 
-        ///     Automatically determines if <typeparamref name="T"/> is 
+        ///     Determine the size in memory used to store a struct
+        ///     of type <typeparamref name="T" /> at runtime.
+        ///     Automatically determines if <typeparamref name="T" /> is
         ///     an array, and if so, checks the array element type.
         /// </summary>
         /// <remarks>
-        ///     The sizeof operator cannot be used to get size information at run time, and so 
+        ///     The sizeof operator cannot be used to get size information at run time, and so
         ///     this quite inelegant method is an unfortunate but necessary workaround.
         /// </remarks>
         /// <typeparam name="T">Type of the struct.</typeparam>
-        /// <returns>Size of a <typeparamref name="T"/> instance in bytes.</returns>
+        /// <returns>Size of a <typeparamref name="T" /> instance in bytes.</returns>
         internal static int SizeOf<T>() where T : struct
         {
-            var typeOfT = typeof(T);
+            Type typeOfT = typeof (T);
             if (typeOfT.IsArray) {
                 typeOfT = typeOfT.GetElementType();
             }
 
-            if (typeOfT == typeof(byte)) {
+            if (typeOfT == typeof (byte)) {
                 return 1;
-            } else if (typeOfT == typeof(short) || typeOfT == typeof(ushort)) {
+            }
+            if (typeOfT == typeof (short) || typeOfT == typeof (ushort)) {
                 return sizeof(short);
-            } else if (typeOfT == typeof(int) || typeOfT == typeof(uint)) {
+            }
+            if (typeOfT == typeof (int) || typeOfT == typeof (uint)) {
                 return sizeof(int);
-            } else if (typeOfT == typeof(long) || typeOfT == typeof(ulong)) {
+            }
+            if (typeOfT == typeof (long) || typeOfT == typeof (ulong)) {
                 return sizeof(long);
             }
             // Other type
-            throw new NotSupportedException("T : " + typeof(T).Name + " - Not a supported type."  );
+            throw new NotSupportedException("T : " + typeof (T).Name + " - Not a supported type.");
         }
     }
 }
