@@ -19,6 +19,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+using PerfCopy;
 
 namespace BitManipulator
 {
@@ -149,7 +150,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder16((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(Int16));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(Int16));
                     }
                 }
             }
@@ -257,7 +258,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder16(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(Int16));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(Int16));
                     }
                 }
             }
@@ -392,7 +393,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder32((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(Int32));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(Int32));
                     }
                 }
             }
@@ -502,7 +503,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder32(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(Int32));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(Int32));
                     }
                 }
             }
@@ -633,7 +634,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder64((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(Int64));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(Int64));
                     }
                 }
             }
@@ -741,7 +742,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder64(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(Int64));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(Int64));
                     }
                 }
             }
@@ -872,7 +873,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder16((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(UInt16));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(UInt16));
                     }
                 }
             }
@@ -980,7 +981,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder16(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(UInt16));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(UInt16));
                     }
                 }
             }
@@ -1115,7 +1116,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder32((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(UInt32));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(UInt32));
                     }
                 }
             }
@@ -1225,7 +1226,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder32(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(UInt32));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(UInt32));
                     }
                 }
             }
@@ -1356,7 +1357,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder64((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(UInt64));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(UInt64));
                     }
                 }
             }
@@ -1464,7 +1465,7 @@ namespace BitManipulator
                     if (BitConverter.IsLittleEndian) {
                         SwapOrder64(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(UInt64));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(UInt64));
                     }
                 }
             }
@@ -1595,7 +1596,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder32((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(Int16));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(Int16));
                     }
                 }
             }
@@ -1701,7 +1702,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder16(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(Int16));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(Int16));
                     }
                 }
             }
@@ -1836,7 +1837,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder32((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(Int32));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(Int32));
                     }
                 }
             }
@@ -1946,7 +1947,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder32(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(Int32));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(Int32));
                     }
                 }
             }
@@ -2077,7 +2078,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder64((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(Int64));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(Int64));
                     }
                 }
             }
@@ -2185,7 +2186,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder64(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(Int64));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(Int64));
                     }
                 }
             }
@@ -2316,7 +2317,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder16((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(UInt16));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(UInt16));
                     }
                 }
             }
@@ -2424,7 +2425,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder16(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(UInt16));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(UInt16));
                     }
                 }
             }
@@ -2559,7 +2560,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder32((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(UInt32));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(UInt32));
                     }
                 }
             }
@@ -2669,7 +2670,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder32(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(UInt32));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(UInt32));
                     }
                 }
             }
@@ -2800,7 +2801,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder64((byte*) iaPtr, baPtr, integerCount);
                     } else {
-                        CopyMemory((byte*) iaPtr, baPtr, integerCount * sizeof(UInt64));
+                        CopyExtensions.CopyMemory((byte*)iaPtr, baPtr, integerCount * sizeof(UInt64));
                     }
                 }
             }
@@ -2908,7 +2909,7 @@ namespace BitManipulator
                     if (!BitConverter.IsLittleEndian) {
                         SwapOrder64(baPtr, (byte*) iaPtr, integerCount);
                     } else {
-                        CopyMemory(baPtr, (byte*) iaPtr, integerCount * sizeof(UInt64));
+                        CopyExtensions.CopyMemory(baPtr, (byte*)iaPtr, integerCount * sizeof(UInt64));
                     }
                 }
             }
@@ -3133,10 +3134,10 @@ namespace BitManipulator
         ///     Validate arguments/parameters to prevent unexpected exceptions.
         ///     Throws well-defined exceptions for different types of invalid arguments(s).
         /// </summary>
-        /// <param name="dst">Destination byte array to write output to.</param>
-        /// <param name="dstOff">Offset in <paramref name="dst" /> to write data to.</param>
         /// <param name="src">Source <typeparamref name="T" /> array to read input from.</param>
         /// <param name="srcOff">Offset in <paramref name="src" /> to read data from.</param>
+        /// <param name="dst">Destination byte array to write output to.</param>
+        /// <param name="dstOff">Offset in <paramref name="dst" /> to write data to.</param>
         /// <param name="count">Number of items (of the size of <typeparamref name="T" />) to process.</param>
         /// <param name="outputSizeRatio">
         ///     How many output units (bytes) are required to write one transformed unit of the output type
@@ -3149,7 +3150,7 @@ namespace BitManipulator
         ///     from will be transformed from and written to <paramref name="dst" />.
         /// </typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="src" />or <paramref name="dst" /> are null.
+        ///     <paramref name="src" /> or <paramref name="dst" /> are null.
         /// </exception>
         /// <exception cref="ArgumentException">
         ///     Length of <paramref name="dst" /> less than 0.
@@ -3393,72 +3394,8 @@ namespace BitManipulator
                 *(dstEnd - i - 7) = *(srcPtr + i + 7);
             }
         }
-
-        internal static unsafe void CopyMemory(byte* srcPtr, byte* dstPtr, int length)
-        {
-            if (Shared.PlatformWordSize == sizeof(UInt32)) {
-                int remainingBytes;
-                int words32 = DivRem(length, sizeof(UInt32), out remainingBytes);
-                var src32Ptr = (UInt32*) srcPtr;
-                var dst32Ptr = (UInt32*) dstPtr;
-                for (int i = 0; i < words32; i += 2) {
-                    *(dst32Ptr + i) = *(src32Ptr + i);
-                    *(dst32Ptr + i + 1) = *(src32Ptr + i + 1);
-                }
-                if (remainingBytes >= sizeof(UInt32)) {
-                    *(dst32Ptr + words32) = *(src32Ptr + words32);
-                    words32++;
-                    remainingBytes -= sizeof(UInt32);
-                }
-                srcPtr += words32 * sizeof(UInt32);
-                dstPtr += words32 * sizeof(UInt32);
-                length = remainingBytes;
-            } else if (Shared.PlatformWordSize == sizeof(UInt64)) {
-                int remainingBytes;
-                int words64 = DivRem(length, sizeof(UInt64), out remainingBytes);
-                var src64Ptr = (UInt64*) srcPtr;
-                var dst64Ptr = (UInt64*) dstPtr;
-                for (int i = 0; i < words64; i += 2) {
-                    *(dst64Ptr + i) = *(src64Ptr + i);
-                    *(dst64Ptr + i + 1) = *(src64Ptr + i + 1);
-                }
-                if (remainingBytes >= sizeof(UInt64)) {
-                    *(dst64Ptr + words64) = *(src64Ptr + words64);
-                    words64++;
-                    remainingBytes -= sizeof(UInt64);
-                }
-                if (remainingBytes >= sizeof(UInt32)) {
-                    *(UInt32*) (dst64Ptr + words64) = *(UInt32*) (src64Ptr + words64);
-                    dstPtr += sizeof(UInt32);
-                    srcPtr += sizeof(UInt32);
-                    remainingBytes -= sizeof(UInt32);
-                }
-                srcPtr += words64 * sizeof(UInt64);
-                dstPtr += words64 * sizeof(UInt64);
-                length = remainingBytes;
-            }
-
-            if (length >= sizeof(UInt16)) {
-                *(UInt16*) dstPtr = *(UInt16*) srcPtr;
-                dstPtr += sizeof(UInt16);
-                srcPtr += sizeof(UInt16);
-                length -= sizeof(UInt16);
-            }
-
-            if (length > 0) {
-                *dstPtr = *srcPtr;
-            }
-        }
 #endif
 
         #endregion
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int DivRem(int dividend, int divisor, out int remainder)
-        {
-            int quotient = dividend / divisor;
-            remainder = dividend - (divisor * quotient);
-            return quotient;
-        }
     }
 }
